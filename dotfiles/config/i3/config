@@ -1,0 +1,229 @@
+###################################################
+################ KEYBINDINGS ######################
+###################################################
+
+set $mod Mod4
+
+# Font for window titles
+font pango:Hack 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+z focus left
+bindsym $mod+x focus down
+bindsym $mod+c focus up
+bindsym $mod+v focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# move focused window
+bindsym $mod+Shift+z move left
+bindsym $mod+Shift+x move down
+bindsym $mod+Shift+c move up
+bindsym $mod+Shift+v move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# split in horizontal orientation
+bindsym $mod+s split h
+
+# split in vertical orientation
+bindsym $mod+a split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+w layout stacking
+bindsym $mod+e layout tabbed
+bindsym $mod+r layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+d focus parent
+
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# screenshots
+bindsym Print exec spectacle
+bindsym Shift+Print exec spectacle -a
+bindsym Ctrl+Print exec spectacle -r
+
+focus_follows_mouse no
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+o restart
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        bindsym z resize shrink width 10 px or 10 ppt
+        bindsym x resize grow height 10 px or 10 ppt
+        bindsym c resize shrink height 10 px or 10 ppt
+        bindsym v resize grow width 10 px or 10 ppt
+
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+r mode "resize"
+
+
+###################################################
+################# WORKSPACE #######################
+###################################################
+
+#enable back-and-forth switching
+workspace_auto_back_and_forth yes
+
+# set workspaces names
+set $workspace1  "1: www"
+set $workspace2  "2: ide"
+set $workspace3  "3: weechat"
+set $workspace4  "4: discord"
+set $workspace5  "5:"
+set $workspace6  "6:"
+set $workspace7  "7:"
+set $workspace8  "8:"
+set $workspace9  "9:"
+set $workspace10 "10: spotify"
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move focused container to workspace and switch
+bindsym $mod+Shift+1 move container to workspace $workspace1; workspace $workspace1 
+bindsym $mod+Shift+2 move container to workspace $workspace2; workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3; workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4; workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5; workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6; workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7; workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8; workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9; workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10; workspace $workspace10
+
+# move focused container to workspace 
+bindsym $mod+Ctrl+Shift+1 move container to workspace $workspace1
+bindsym $mod+Ctrl+Shift+2 move container to workspace $workspace2
+bindsym $mod+Ctrl+Shift+3 move container to workspace $workspace3
+bindsym $mod+Ctrl+Shift+4 move container to workspace $workspace4
+bindsym $mod+Ctrl+Shift+5 move container to workspace $workspace5
+bindsym $mod+Ctrl+Shift+6 move container to workspace $workspace6
+bindsym $mod+Ctrl+Shift+7 move container to workspace $workspace7
+bindsym $mod+Ctrl+Shift+8 move container to workspace $workspace8
+bindsym $mod+Ctrl+Shift+9 move container to workspace $workspace9
+bindsym $mod+Ctrl+Shift+0 move container to workspace $workspace10
+
+assign [class="Chromium"] $workspace1
+for_window [class="Spotify"] move to workspace $workspace10
+for_window [class="discord"] move to workspace $workspace4
+
+
+###################################################
+################### STYLE #########################
+###################################################
+
+#hide borders for new windows
+new_window none
+
+# colors set from ~/.Xresources
+set_from_resource	$background	background
+set_from_resource	$foreground	foreground
+set_from_resource	$color0		color0
+set_from_resource 	$color1 	color1
+set_from_resource 	$color2 	color2
+set_from_resource 	$color3 	color3
+set_from_resource 	$color4 	color4
+set_from_resource 	$color5 	color5
+set_from_resource 	$color6		color6
+set_from_resource	$color7		color7
+set_from_resource	$color8		color8
+set_from_resource	$color9		color9
+set_from_resource	$color10	color10
+set_from_resource	$color11	color11
+set_from_resource	$color12	color12
+set_from_resource	$color13	color13
+set_from_resource	$color14	color14
+set_from_resource	$color15	color15
+
+client.background	$color0
+
+client.focused         	$color7		$color0		$color7		$color4		$color4	
+client.unfocused       	$color7		$color0		$color7		$color0		$color0
+client.focused_inactive	$color7		$color0 	$color7		$color0		$color0
+client.urgent		$color7		$color0 	$color7		$color0 	$color0
+client.placeholder	$color7		$color0		$color7		$color0		$color0
+
+
+###################################################
+#################### gaps #########################
+###################################################
+
+#gaps inner 10
+#gaps outer 10
+
+#smart_borders on
+#smart_gaps on
+
+
+###################################################
+################## STARTUP ########################
+###################################################
+
+#exec --no-startup-id compton
+#exec --no-startup-id spotify
+#exec --no-startup-id nitrogen --restore
+
+
+###################################################
+##################### KDE #########################
+###################################################
+
+for_window [title="Desktop — Plasma"] kill; #TODO: add desktop window support for i3 
+
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none

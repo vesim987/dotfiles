@@ -1,0 +1,31 @@
+config:
+  backup: true
+  create: true
+  dotpath: dotfiles
+dotfiles:
+  f_albert.conf:
+    dst: ~/.config/albert/albert.conf
+    src: config/albert/albert.conf
+  f_compton.conf:
+    dst: ~/.config/compton.conf
+    src: config/compton.conf
+  f_i3_config:
+    dst: ~/.config/i3/config
+    src: config/i3/config
+  f_xdefaults:
+    dst: ~/.Xdefaults
+    src: Xdefaults
+  f_zshrc:
+    dst: ~/.zshrc
+    src: zshrc
+profiles:
+  arch:
+    dotfiles:
+    - f_zshrc
+    - f_i3_config
+    - f_compton.conf
+    - f_albert.conf
+    - f_xdefaults
+  vps:
+    dotfiles:
+    - f_zshrc
