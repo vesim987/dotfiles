@@ -12,6 +12,9 @@ dotfiles:
   f_i3_config:
     dst: ~/.config/i3/config
     src: config/i3/config
+  f_init.vim:
+    dst: ~/.config/nvim/init.vim
+    src: config/nvim/init.vim
   f_xdefaults:
     dst: ~/.Xdefaults
     src: Xdefaults
@@ -26,6 +29,7 @@ profiles:
     - f_compton.conf
     - f_albert.conf
     - f_xdefaults
+    - f_init.vim
   vps:
     dotfiles:
     - f_zshrc
