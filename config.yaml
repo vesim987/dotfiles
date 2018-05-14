@@ -15,6 +15,9 @@ dotfiles:
   f_init.vim:
     dst: ~/.config/nvim/init.vim
     src: config/nvim/init.vim
+  f_tmux.conf:
+    dst: ~/.tmux.conf
+    src: tmux.conf
   f_xdefaults:
     dst: ~/.Xdefaults
     src: Xdefaults
@@ -30,6 +33,7 @@ profiles:
     - f_albert.conf
     - f_xdefaults
     - f_init.vim
+    - f_tmux.conf
   vps:
     dotfiles:
     - f_zshrc
