@@ -2,15 +2,17 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/vesim/.oh-my-zsh
+  export ZSH=/home/vesim/local/share/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="spaceship"
 
+SPACESHIP_TIME_SHOW="true"
+
 # Set list of themes to load
-# Setting this variable when ZSH_THEME="spaceship"
+# Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of
 # looking in ~/.oh-my-zsh/themes/
 # An empty array have no effect
@@ -59,46 +61,28 @@ ZSH_THEME="spaceship"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  cp
+  archlinux
   command-not-found
+  common-aliases
   extract
+  #last-working-dir
+  pip
+  python
+  ssh-agent
+  sudo
+  systemd
   tmux
+  #vi-mode
   git
   zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+alias vim="nvim"
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$HOME/bin:$PATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+EDITOR=nvim
 
 
-source "/home/vesim/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
