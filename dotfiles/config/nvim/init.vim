@@ -97,6 +97,8 @@ call plug#begin('~/.local/share/nvim/plugged')
       return fnamemodify(filename, ":~:.") . modified
     endfunction
     
+
+    
     function! LightlineFileEncoding()
     	return &fileencoding
     endfunction
@@ -114,12 +116,10 @@ call plug#begin('~/.local/share/nvim/plugged')
     endfunction
     
     function! LightlineUpdate()
-      if g:goyo_entered == 0
         call lightline#update()
-      endif
     endfunction
     
-    augroup alestatus
+    augroup alestatus " FIXME: add ale to lightline
     	autocmd User ALELint call LightlineUpdate()
     augroup end 
   " } // Ligtline
@@ -211,6 +211,13 @@ call plug#begin('~/.local/share/nvim/plugged')
     
     " clang-based symbol renaming
     Plug 'uplus/vim-clang-rename'
+    
+    let g:LanguageClient_serverCommands = {
+      \ 'c': ['clangd'],                                                                                                                                                                             
+      \ 'cpp': ['clangd']                                                                                                                                                                             
+      \ }
+    let g:LanguageClient_loadSettings = 1
+    let g:LanguageClient_settingsPath = '/home/vesim/.config/nvim/settings.json'
 
   " } // C/C++
   
@@ -223,20 +230,20 @@ call plug#begin('~/.local/share/nvim/plugged')
   " } // BuildTools
 
   " Linters/Formatters {
-    " Syntastic {
-    Plug 'vim-syntastic/syntastic'
-      set statusline+=%#warningmsg#
-      set statusline+=%{SyntasticStatuslineFlag()}
-      set statusline+=%*
+    " ALE {
+      Plug 'w0rp/ale'
+       
+      " enable quickfix window
+      let g:ale_set_loclist = 0
+      let g:ale_set_quickfix = 1
       
-      " TODO: make it async or use something else that support async
-      " TODO: finish configuring that
-      " TODO: for c/cpp add config based on deoplete-clang
+      " show quickfix window by default
+      let g:ale_open_list = 1
       
-      let g:syntastic_always_populate_loc_list = 1
-      let g:syntastic_auto_loc_list = 1
-      let g:syntastic_check_on_open = 1
-      let g:syntastic_check_on_wq = 0
+      " navigation 
+      nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+      nmap <silent> <C-j> <Plug>(ale_next_wrap) 
+      
     " { // Syntastic
     
     " clang-format {
@@ -251,25 +258,34 @@ call plug#begin('~/.local/share/nvim/plugged')
     " } // clang-format
   " } // Linters/Formatters
   
+  " TODO {
+    Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ } "
+  " } // TODO
+
   " Autocomplete {
     " Plug 'Shougo/echodoc.vim' " FIXME: somehow force it to work
 
     " Deoplete {
       Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+      
+
 
       let g:deoplete#enable_at_startup = 1
       let g:deoplete#enable_smart_case = 1
       
       autocmd CompleteDone * silent! pclose!
-
+      
       " Clang {
-	Plug 'zchee/deoplete-clang'
-	let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-	let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/6.0.0/' " TODO: add automaticaly detection of that
+	" Plug 'zchee/deoplete-clang'
+	" let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+	" let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/6.0.0/' " TODO: add automaticaly detection of that
 
-	let g:deoplete#auto_complete_start_length = 1
-	let g:deoplete#sources#clang#sort_algo = 'priority'
-	let g:deoplete#sources#clang#std#cpp = 'c++1z'
+	" let g:deoplete#auto_complete_start_length = 1
+	" let g:deoplete#sources#clang#sort_algo = 'priority'
+	" let g:deoplete#sources#clang#std#cpp = 'c++1z'
       
       " } //Clang
 
@@ -332,4 +348,5 @@ call plug#end()
 " TODO: XXX
 colorscheme gruvbox 
 hi Normal guibg=NONE ctermbg=NONE
+      call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
 
