@@ -205,6 +205,11 @@ call plug#begin('~/.local/share/nvim/plugged')
   
   " }}}
   
+  " Asm {
+    Plug 'zchee/deoplete-asm'
+  
+  " }
+
   " C/C++ {
     " LLDB integration
     Plug 'dbgx/lldb.nvim'
@@ -212,13 +217,10 @@ call plug#begin('~/.local/share/nvim/plugged')
     " clang-based symbol renaming
     Plug 'uplus/vim-clang-rename'
     
-    let g:LanguageClient_serverCommands = {
-      \ 'c': ['clangd'],                                                                                                                                                                             
-      \ 'cpp': ['clangd']                                                                                                                                                                             
-      \ }
+    let g:LanguageClient_serverCommands = { 'c': ['clangd'], 'cpp': ['clangd'] } " FIXME: doesn't work for C
     let g:LanguageClient_loadSettings = 1
-    let g:LanguageClient_settingsPath = '/home/vesim/.config/nvim/settings.json'
-
+    let g:LanguageClient_settingsPath = '/home/'.$USER.'/.config/nvim/settings.json' " TODO: user better method to get neovim config directory
+  
   " } // C/C++
   
   " Build tools {
@@ -232,7 +234,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Linters/Formatters {
     " ALE {
       Plug 'w0rp/ale'
-       
+
       " enable quickfix window
       let g:ale_set_loclist = 0
       let g:ale_set_quickfix = 1
@@ -348,5 +350,5 @@ call plug#end()
 " TODO: XXX
 colorscheme gruvbox 
 hi Normal guibg=NONE ctermbg=NONE
-      call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
+call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
 
