@@ -39,6 +39,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   set shiftwidth=0 " use tabstop value
   set softtabstop=-1 " use shiftwidth value 
   set shiftround " indent to round multiple of shiftwidth
+  
+  set updatetime=10 " used by CursorHold event, makes Tagbar and some other plugins work much faster
 
 " } // General
 
@@ -97,8 +99,6 @@ call plug#begin('~/.local/share/nvim/plugged')
       return fnamemodify(filename, ":~:.") . modified
     endfunction
     
-
-    
     function! LightlineFileEncoding()
     	return &fileencoding
     endfunction
@@ -123,18 +123,22 @@ call plug#begin('~/.local/share/nvim/plugged')
     	autocmd User ALELint call LightlineUpdate()
     augroup end 
   " } // Ligtline
+
   set t_Co=256
 
   syntax on
+
   filetype plugin indent on
 
   highlight Comment cterm=italic
+
+  au FileType qf wincmd J " make quickix window to take whole horizontal bottom space 
 
 " } // Appereance
 
 " Mappings {
   
-  let mpaleader = ','
+  let mapleader = ','
 
   nmap <leader>, :w<cr> 
 
@@ -171,16 +175,18 @@ call plug#begin('~/.local/share/nvim/plugged')
  
   " run commands async
   Plug 'skywind3000/asyncrun.vim'
+  " Plug 'tpope/vim-dispatch'
 
-  
   " NERDTree {
     Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+    
+    " Git integration for nerdtree
     Plug 'Xuyuanp/nerdtree-git-plugin'
-    Plug 'ryanoasis/vim-devicons'
+    " Plug 'ryanoasis/vim-devicons'
 
     " Toggle NERDTree
     function! ToggleNerdTree()
-      if @% != "" && @% !~ "Startify" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
+      if @% != "" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
         :NERDTreeFind
       else
       	:NERDTreeToggle
@@ -194,20 +200,23 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " } // NERDTree
   
-  " vim-fugitive {{{
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-rhubarb' " hub extension for fugitive
+  " GIT {
+    " vim-fugitive {
+      Plug 'tpope/vim-fugitive'
+      Plug 'tpope/vim-rhubarb' " hub extension for fugitive
 
-    nmap <silent> <leader>gs :Gstatus<cr>
-    nmap <leader>ge :Gedit<cr>
-    nmap <silent><leader>gr :Gread<cr>
-    nmap <silent><leader>gb :Gblame<cr>
-  
-  " }}}
-  
+      nmap <silent> <leader>gs :Gstatus<cr>
+      nmap <leader>ge :Gedit<cr>
+      nmap <silent><leader>gr :Gread<cr>
+      nmap <silent><leader>gb :Gblame<cr>
+    
+    " }
+       
+    Plug 'airblade/vim-gitgutter'
+  " } // GIT
+
   " Asm {
-    Plug 'zchee/deoplete-asm'
-  
+    Plug 'zchee/deoplete-asm' 
   " }
 
   " C/C++ {
@@ -216,11 +225,13 @@ call plug#begin('~/.local/share/nvim/plugged')
     
     " clang-based symbol renaming
     Plug 'uplus/vim-clang-rename'
-    
-    let g:LanguageClient_serverCommands = { 'c': ['clangd'], 'cpp': ['clangd'] } " FIXME: doesn't work for C
-    let g:LanguageClient_loadSettings = 1
-    let g:LanguageClient_settingsPath = '/home/'.$USER.'/.config/nvim/settings.json' " TODO: user better method to get neovim config directory
   
+    " gtest integration for vim XXX: it is working pretty bad
+    Plug 'alepez/vim-gtest'
+    
+    " rtags integration for vim
+    Plug 'lyuts/vim-rtags'
+
   " } // C/C++
   
   " Build tools {
@@ -228,12 +239,17 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     let g:cmake_export_compile_commands = 1
     let g:cmake_ycm_symlinks = 1
-
+    
   " } // BuildTools
 
   " Linters/Formatters {
     " ALE {
       Plug 'w0rp/ale'
+      let g:ale_linters = {
+      \   'cpp': ['clangtidy'],
+      \}
+       
+      let g:ale_cpp_clang_options = '-std=c++17 -Wall -Weverything -Wextra -Wno-c++98-compat -Wno-cc+98-c++11-c++14-compat -Wno-shadow -Wno-c++98-compat-pedantic -Wno-global-constructors -Wno-gnu-zero-variadic-macro-arguments'
 
       " enable quickfix window
       let g:ale_set_loclist = 0
@@ -246,7 +262,7 @@ call plug#begin('~/.local/share/nvim/plugged')
       nmap <silent> <C-k> <Plug>(ale_previous_wrap)
       nmap <silent> <C-j> <Plug>(ale_next_wrap) 
       
-    " { // Syntastic
+    " { // ALE
     
     " clang-format {
       Plug 'rhysd/vim-clang-format'
@@ -261,35 +277,27 @@ call plug#begin('~/.local/share/nvim/plugged')
   " } // Linters/Formatters
   
   " TODO {
-    Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ } "
+    " Plug 'autozimu/LanguageClient-neovim', {
+    "   \ 'branch': 'next',
+    "   \ 'do': 'bash install.sh',
+    "   \ } "
   " } // TODO
 
   " Autocomplete {
     " Plug 'Shougo/echodoc.vim' " FIXME: somehow force it to work
 
+    Plug 'richq/vim-cmake-completion' " FIXME: doesn't work, probably because of deoplete
+
     " Deoplete {
       Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
       
-
-
       let g:deoplete#enable_at_startup = 1
       let g:deoplete#enable_smart_case = 1
       
       autocmd CompleteDone * silent! pclose!
       
-      " Clang {
-	" Plug 'zchee/deoplete-clang'
-	" let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-	" let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/6.0.0/' " TODO: add automaticaly detection of that
-
-	" let g:deoplete#auto_complete_start_length = 1
-	" let g:deoplete#sources#clang#sort_algo = 'priority'
-	" let g:deoplete#sources#clang#std#cpp = 'c++1z'
-      
-      " } //Clang
+      " rtags plugin for deoplete
+      Plug 'rzaluska/deoplete-rtags'
 
       " Python {
 	Plug 'zchee/deoplete-jedi'
@@ -313,17 +321,17 @@ call plug#begin('~/.local/share/nvim/plugged')
       " D {
         Plug 'landaire/deoplete-d'
 
-	function StartDCDServer()
-	  let g:deoplete#sources#d#dcd_server_autostart = 1
-	endfunction
+        function StartDCDServer()
+            let g:deoplete#sources#d#dcd_server_autostart = 1
+        endfunction
 
-	autocmd FileType d call StartDCDServer
+        autocmd FileType d call StartDCDServer
       
       " } // D
       
       " VimL {
         Plug 'Shougo/neco-vim'
-
+ 
       " } // VimL
     " } // Deoplete
   " } // Autocomplete
@@ -350,5 +358,5 @@ call plug#end()
 " TODO: XXX
 colorscheme gruvbox 
 hi Normal guibg=NONE ctermbg=NONE
-call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
+" call deoplete#custom#source('LanguageClient', 'min_pattern_length', 1)
 
