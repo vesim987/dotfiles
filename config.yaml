@@ -6,6 +6,9 @@ dotfiles:
   f_albert.conf:
     dst: ~/.config/albert/albert.conf
     src: config/albert/albert.conf
+  f_backlight.sh:
+    dst: ~/.config/sway/backlight.sh
+    src: config/sway/backlight.sh
   f_compton.conf:
     dst: ~/.config/compton.conf
     src: config/compton.conf
@@ -15,6 +18,9 @@ dotfiles:
   f_init.vim:
     dst: ~/.config/nvim/init.vim
     src: config/nvim/init.vim
+  f_sway_config:
+    dst: ~/.config/sway/config
+    src: config/sway/config
   f_tmux.conf:
     dst: ~/.tmux.conf
     src: tmux.conf
@@ -25,15 +31,10 @@ dotfiles:
     dst: ~/.zshrc
     src: zshrc
 profiles:
-  arch:
+  storm:
     dotfiles:
-    - f_zshrc
-    - f_i3_config
-    - f_compton.conf
-    - f_albert.conf
-    - f_xdefaults
-    - f_init.vim
-    - f_tmux.conf
+    - f_sway_config
+    - f_backlight.sh
   vps:
     dotfiles:
     - f_zshrc
