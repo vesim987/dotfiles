@@ -244,23 +244,23 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Linters/Formatters {
     " ALE {
-      Plug 'w0rp/ale'
-      let g:ale_linters = {
-      \   'cpp': ['clangtidy'],
-      \}
-       
-      let g:ale_cpp_clang_options = '-std=c++17 -Wall -Weverything -Wextra -Wno-c++98-compat -Wno-cc+98-c++11-c++14-compat -Wno-shadow -Wno-c++98-compat-pedantic -Wno-global-constructors -Wno-gnu-zero-variadic-macro-arguments'
-
-      " enable quickfix window
-      let g:ale_set_loclist = 0
-      let g:ale_set_quickfix = 1
-      
-      " show quickfix window by default
-      let g:ale_open_list = 1
-      
-      " navigation 
-      nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-      nmap <silent> <C-j> <Plug>(ale_next_wrap) 
+"      Plug 'w0rp/ale'
+"      let g:ale_linters = {
+"      \   'cpp': ['clangtidy'],
+"      \}
+"       
+"      let g:ale_cpp_clang_options = '-std=c++17 -Wall -Weverything -Wextra -Wno-c++98-compat -Wno-cc+98-c++11-c++14-compat -Wno-shadow -Wno-c++98-compat-pedantic -Wno-global-constructors -Wno-gnu-zero-variadic-macro-arguments'
+"
+"      " enable quickfix window
+"      let g:ale_set_loclist = 0
+"      let g:ale_set_quickfix = 1
+"      
+"      " show quickfix window by default
+"      let g:ale_open_list = 1
+"      
+"      " navigation 
+"      nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+"      nmap <silent> <C-j> <Plug>(ale_next_wrap) 
       
     " { // ALE
     
@@ -289,18 +289,20 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'richq/vim-cmake-completion' " FIXME: doesn't work, probably because of deoplete
 
     " Deoplete {
-      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-      
-      let g:deoplete#enable_at_startup = 1
-      let g:deoplete#enable_smart_case = 1
-      
-      autocmd CompleteDone * silent! pclose!
-      
-      " rtags plugin for deoplete
-      Plug 'rzaluska/deoplete-rtags'
+    "  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    "  
+    "  let g:deoplete#enable_at_startup = 1
+    "  let g:deoplete#enable_smart_case = 1
+    "  
+    "  autocmd CompleteDone * silent! pclose!
+    "  
+    "  " rtags plugin for deoplete
+    "  Plug 'rzaluska/deoplete-rtags'
 
-      " Python {
-	Plug 'zchee/deoplete-jedi'
+    "  " Python {
+	"Plug 'zchee/deoplete-jedi'
+
+    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 	let g:deoplete#sources#jedi#show_docstring = 1
 	

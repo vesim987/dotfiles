@@ -9,6 +9,9 @@ dotfiles:
   f_backlight.sh:
     dst: ~/.config/sway/backlight.sh
     src: config/sway/backlight.sh
+  f_coc-settings.json:
+    dst: ~/.config/nvim/coc-settings.json
+    src: config/nvim/coc-settings.json
   f_compton.conf:
     dst: ~/.config/compton.conf
     src: config/compton.conf
@@ -35,6 +38,8 @@ profiles:
     dotfiles:
     - f_sway_config
     - f_backlight.sh
+    - f_coc-settings.json
+    - f_init.vim
   vps:
     dotfiles:
     - f_zshrc
