@@ -11,16 +11,22 @@
        }
     },
     "MPLS": {
-          "command": "/usr/bin/dotnet",
-          "args": ["exec", "/home/vesim/python-language-server/output/bin/Debug/Microsoft.Python.LanguageServer.dll"],
-          "filetypes": ["python"],
-          "initializationOptions": {
-              "interpreter": {
-              "properties": {
-            "InterpreterPath": "/usr/bin/python3",
-            "Version": "3.7"
-          }    }
-              }
+      "command": "/usr/bin/dotnet",
+      "args": ["exec", "/home/vesim/python-language-server/output/bin/Debug/Microsoft.Python.LanguageServer.dll"],
+      "filetypes": ["python"],
+      "initializationOptions": {
+        "interpreter": {
+          "properties": {
+            "InterpreterPath": "/usr/bin/python2",
+            "Version": "2.7"
+          }    
+        }
       }
+    },
+    "served": {
+        "command": "serve-d",
+        "filetypes": ["d"],
+        "rootPatterns": ["dub.json"]
+    }
   }
 }

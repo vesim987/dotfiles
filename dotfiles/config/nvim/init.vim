@@ -40,7 +40,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   set softtabstop=-1 " use shiftwidth value 
   set shiftround " indent to round multiple of shiftwidth
   
-  set updatetime=10 " used by CursorHold event, makes Tagbar and some other plugins work much faster
+  set updatetime=100 " used by CursorHold event, makes Tagbar and some other plugins work much faster
 
 " } // General
 
@@ -321,13 +321,13 @@ call plug#begin('~/.local/share/nvim/plugged')
       " } // Python
       
       " D {
-        Plug 'landaire/deoplete-d'
+	" Plug 'landaire/deoplete-d'
 
-        function StartDCDServer()
-            let g:deoplete#sources#d#dcd_server_autostart = 1
-        endfunction
+        " function StartDCDServer()
+        "     let g:deoplete#sources#d#dcd_server_autostart = 1
+        " endfunction
 
-        autocmd FileType d call StartDCDServer
+        " autocmd FileType d call StartDCDServer
       
       " } // D
       
@@ -349,7 +349,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   function! CTFMode()
     let g:VimuxResetSequence = '^c ^c clear Enter'
-    autocmd BufWritePost *.py VimuxRunCommand('python2 ' . @%) " FIXME: use deoplate-jedi config
+    autocmd BufWritePost *.py :call VimuxRunLastCommand() " FIXME: use deoplate-jedi config
+    "autocmd BufWritePost *.py :call VimuxRunCommand('python2 ' . @%) " FIXME: use deoplate-jedi config
   endfunction
   command! CTFMode call CTFMode()
 
