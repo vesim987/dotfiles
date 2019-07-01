@@ -3,13 +3,13 @@ config:
   create: true
   dotpath: dotfiles
 dotfiles:
-  f_albert.conf:
+  f_albert_config:
     dst: ~/.config/albert/albert.conf
     src: config/albert/albert.conf
   f_backlight.sh:
     dst: ~/.config/sway/backlight.sh
     src: config/sway/backlight.sh
-  f_coc-settings.json:
+  f_nvim_coc_config:
     dst: ~/.config/nvim/coc-settings.json
     src: config/nvim/coc-settings.json
   f_compton.conf:
@@ -18,13 +18,13 @@ dotfiles:
   f_i3_config:
     dst: ~/.config/i3/config
     src: config/i3/config
-  f_init.vim:
+  f_nvim_config:
     dst: ~/.config/nvim/init.vim
     src: config/nvim/init.vim
   f_sway_config:
     dst: ~/.config/sway/config
     src: config/sway/config
-  f_tmux.conf:
+  f_tmux_config:
     dst: ~/.tmux.conf
     src: tmux.conf
   f_xdefaults:
@@ -38,8 +38,11 @@ profiles:
     dotfiles:
     - f_sway_config
     - f_backlight.sh
-    - f_coc-settings.json
-    - f_init.vim
+    - f_nvim_config
+    - f_nvim_coc_config
+    - f_zshrc
+    - f_tmux_config
+    - f_albert_config
   vps:
     dotfiles:
     - f_zshrc
