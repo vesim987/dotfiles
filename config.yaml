@@ -23,7 +23,7 @@ dotfiles:
     dst: ~/.config/albert/albert.conf
     src: config/albert/albert.conf
     actions:
-    - check_albert
+      - check_albert
   f_nvim_coc_config:
     dst: ~/.config/nvim/coc-settings.json
     src: config/nvim/coc-settings.json
@@ -31,35 +31,35 @@ dotfiles:
     dst: ~/.config/compton.conf
     src: config/compton.conf
     actions:
-    - check_compton
+      - check_compton
   f_i3_config:
     dst: ~/.config/i3/config
     src: config/i3/config
     actions:
-    - check_i3
+      - check_i3
   f_nvim_config:
     dst: ~/.config/nvim/init.vim
     src: config/nvim/init.vim
     actions:
-    - check_nvim
-    - nvim_plug_install
-    - nvim_plug
+      - check_nvim
+      - nvim_plug_install
+      - nvim_plug
   f_sway_config:
     dst: ~/.config/sway/config
     src: config/sway/config
     actions:
-    - check_sway
+      - check_sway
   f_sway_backlight_sh:
     src: config/sway/backlight.sh
     dst: ~/.config/sway/backlight.sh
     actions:
-    - check_sway
-    - check_light
+      - check_sway
+      - check_light
   f_tmux_config:
     dst: ~/.tmux.conf
     src: tmux.conf
     actions:
-    - check_tmux
+      - check_tmux
   f_xdefaults:
     dst: ~/.Xdefaults
     src: Xdefaults
@@ -67,7 +67,7 @@ dotfiles:
     dst: ~/.zshrc
     src: zshrc
     actions:
-    - check_zsh
+      - check_zsh
   f_alacritty_yml:
     src: config/alacritty/alacritty.yml
     dst: ~/.config/alacritty/alacritty.yml
