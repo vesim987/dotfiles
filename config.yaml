@@ -1,48 +1,84 @@
+actions:
+  pre:
+    nvim_plug_install: test -e ~/.local/share/nvim/site/autoload/plug.vim || curl
+      -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    check_albert: "command -v albert >/dev/null && echo 'ERROR: albert not found'"
+    check_i3: "command -v i3 >/dev/null && echo 'ERROR: i3 not found'"
+    check_nvim: "command -v nvim >/dev/null && echo 'ERROR: nvim not found'"
+    check_tmux: "command -v tmux >/dev/null && echo 'ERROR: tmux not found'"
+    check_sway: "command -v sway >/dev/null && echo 'ERROR: sway not found'"
+    check_light: "command -v light >/dev/null && echo 'ERROR: light not found'"
+    check_compton: "command -v compton >/dev/null && echo 'ERROR: compton not found'"
+    check_zsh: "command -v zsh >/dev/null && echo 'ERROR: zsh not found'"
+  nvim_plug: nvim +PlugInstall +qall
 config:
   backup: true
   create: true
+  banner: false
+  showdiff: true
   dotpath: dotfiles
 dotfiles:
   f_albert_config:
     dst: ~/.config/albert/albert.conf
     src: config/albert/albert.conf
-  f_backlight.sh:
-    dst: ~/.config/sway/backlight.sh
-    src: config/sway/backlight.sh
+    actions:
+    - check_albert
   f_nvim_coc_config:
     dst: ~/.config/nvim/coc-settings.json
     src: config/nvim/coc-settings.json
   f_compton.conf:
     dst: ~/.config/compton.conf
     src: config/compton.conf
+    actions:
+    - check_compton
   f_i3_config:
     dst: ~/.config/i3/config
     src: config/i3/config
+    actions:
+    - check_i3
   f_nvim_config:
     dst: ~/.config/nvim/init.vim
     src: config/nvim/init.vim
+    actions:
+    - check_nvim
+    - nvim_plug_install
+    - nvim_plug
   f_sway_config:
     dst: ~/.config/sway/config
     src: config/sway/config
+    actions:
+    - check_sway
+  f_sway_backlight_sh:
+    src: config/sway/backlight.sh
+    dst: ~/.config/sway/backlight.sh
+    actions:
+    - check_sway
+    - check_light
   f_tmux_config:
     dst: ~/.tmux.conf
     src: tmux.conf
+    actions:
+    - check_tmux
   f_xdefaults:
     dst: ~/.Xdefaults
     src: Xdefaults
   f_zshrc:
     dst: ~/.zshrc
     src: zshrc
+    actions:
+    - check_zsh
 profiles:
   storm:
     dotfiles:
     - f_sway_config
-    - f_backlight.sh
     - f_nvim_config
     - f_nvim_coc_config
     - f_zshrc
     - f_tmux_config
     - f_albert_config
+    - f_sway_backlight_sh
   vps:
     dotfiles:
     - f_zshrc
+    - f_nvim_config
+    - f_tmux_config
