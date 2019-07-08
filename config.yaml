@@ -10,6 +10,7 @@ actions:
     check_light: "command -v light >/dev/null && echo 'ERROR: light not found'"
     check_compton: "command -v compton >/dev/null && echo 'ERROR: compton not found'"
     check_zsh: "command -v zsh >/dev/null && echo 'ERROR: zsh not found'"
+    check_alacritty: "command -v alacritty >/dev/null && echo 'ERROR: alacritty not found'"
   nvim_plug: nvim +PlugInstall +qall
 config:
   backup: true
@@ -67,6 +68,11 @@ dotfiles:
     src: zshrc
     actions:
     - check_zsh
+  f_alacritty_yml:
+    src: config/alacritty/alacritty.yml
+    dst: ~/.config/alacritty/alacritty.yml
+    actions:
+      - check_alacritty
 profiles:
   storm:
     dotfiles:
@@ -77,6 +83,7 @@ profiles:
     - f_tmux_config
     - f_albert_config
     - f_sway_backlight_sh
+    - f_alacritty_yml
   vps:
     dotfiles:
     - f_zshrc
