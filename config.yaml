@@ -84,6 +84,14 @@ profiles:
     - f_albert_config
     - f_sway_backlight_sh
     - f_alacritty_yml
+  cyclone:
+    dotfiles:
+    - f_nvim_config
+    - f_nvim_coc_config
+    - f_zshrc
+    - f_tmux_config
+    - f_albert_config
+    - f_alacritty_yml
   vps:
     dotfiles:
     - f_zshrc
