@@ -3,7 +3,7 @@
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
 # Read `man 5 sway` for a complete reference.
-
+#xwayland disable
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -19,6 +19,20 @@ set $term alacritty
 # Note: it's recommended that you pass the final command to sway
 set $menu dmenu_path | dmenu -m eDP-1 | xargs swaymsg exec --
 
+for_window [title="albert — Albert"] border none
+for_window [title="udiskie" app_id="udiskie"] floating enable
+exec pulseaudio --daemonize=true
+exec albert
+exec waybar
+exec mako
+exec udiskie
+exec /usr/lib/kdeconnectd
+exec /usr/lib/polkit-kde-authentication-agent-1
+exec redshift -c ~/.config/redshift/redshift.conf
+
+
+exec usbguard-applet-qt
+for_window [title="USB Device Inserted" app_id="usbguard-applet-qt"] floating enable
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
@@ -37,41 +51,34 @@ output 'Dell Inc. DELL U2414H 292K46A515ML' resolution 1920x1080 position 0,0 sc
 #
 # Example configuration:
 #
- exec swayidle -w \
-          timeout 60 'swaylock -f -c 000000' \
-          timeout 120 'swaymsg "output * dpms off"' \
-               resume 'swaymsg "output * dpms on"' \
-          before-sleep 'swaylock -f -c 000000'
-
-exec waybar
-
+exec /usr/bin/bash -c "cd ~/.config/sway/idle; ./start.sh"
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-bindsym XF86MonBrightnessUp exec ~/.config/sway/backlight.sh set +5%
-bindsym XF86MonBrightnessDown exec ~/.config/sway/backlight.sh set 5%-
+bindsym --locked XF86MonBrightnessUp exec ~/.config/sway/backlight.sh +5%
+bindsym --locked XF86MonBrightnessDown exec ~/.config/sway/backlight.sh -5%
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume "@DEFAULT_SINK@" +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume "@DEFAULT_SINK@" -5% #decrease sound volume
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-sink-mute "@DEFAULT_SINK@" toggle # mute sound
-#bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume "@DEFAULT_SINK@" +5% #increase sound volume
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume "@DEFAULT_SINK@" -5% #decrease sound volume
+bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute "@DEFAULT_SINK@" toggle # mute sound
+bindcode --locked 248 exec --no-startup-id pactl set-sink-mute "@DEFAULT_SINK@" toggle # mute sound
 
 #bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute "@DEFAULT_SOURCE@" toggle # mute mic
 ### Input configuration
 #
 # Example configuration:
 #
-   input "1739:52552:SYNA1D31:00_06CB:CD48_Touchpad" {
-       dwt enabled
-       tap enabled
-       #natural_scroll enabled
-       middle_emulation enabled
-   }
-   input "1739:6572:SYNA2393:00_06CB:19AC" {
-       map_to_output eDP-1
-   }
+input "1739:52552:SYNA1D31:00_06CB:CD48_Touchpad" {
+      dwt enabled
+      tap enabled
+      #natural_scroll enabled
+      middle_emulation enabled
+}
+input "1739:6572:SYNA2393:00_06CB:19AC" {
+      map_to_output eDP-1
+}
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -79,10 +86,13 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-sink-mute "@DEFAULT_SINK
 input * xkb_layout "pl,us"
 
 
-for_window [class="^.*"] border pixel 1
-default_border pixel 1
+for_window [class="^.*"] border pixel 0
+default_border pixel 0
 focus_follows_mouse no
-
+   
+   bindsym $mod+Tab workspace next_on_output
+   bindsym $mod+Shift+Tab workspace prev_on_output
+   bindsym $mod+Ctrl+L exec ~/.config/sway/idle/lock.sh
 ### Key bindings
 #
 # Basics:
@@ -220,23 +230,5 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-#bar {
-#    position top
-#
-#    # When the status_command prints a new line to stdout, swaybar updates.
-#    # The default just shows the current date and time.
-#    status_command while echo a $[1.0*$(</sys/class/power_supply/BAT0/energy_now)/$(</sys/class/power_supply/BAT0/energy_full)*100] | sed 's/\..*//'; do sleep 1; done
-#
-#    colors {
-#        statusline #ffffff
-#        background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
-#    }
-#}
 
 include @sysconfdir@/sway/config.d/*

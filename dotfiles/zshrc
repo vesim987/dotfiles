@@ -26,3 +26,8 @@ source $ZSH/oh-my-zsh.sh
 
 export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 export EDITOR=nvim
+
+hash nvimpager && export PAGER=nvimpager
+
+hash nvim && alias vim=nvim
+
