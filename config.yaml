@@ -74,9 +74,6 @@ dotfiles:
     dst: ~/.config/alacritty/alacritty.yml
     actions:
     - check_alacritty
-  f_config:
-    src: config/sway/config
-    dst: ~/.config/sway/config
 profiles:
   storm:
     dotfiles:
@@ -88,7 +85,6 @@ profiles:
     - f_albert_config
     - f_sway_backlight_sh
     - f_alacritty_yml
-    - f_config
   cyclone:
     dotfiles:
     - f_nvim_config
