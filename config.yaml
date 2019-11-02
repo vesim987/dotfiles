@@ -12,6 +12,7 @@ actions:
     check_zsh: "command -v zsh >/dev/null && echo 'ERROR: zsh not found'"
     check_alacritty: "command -v alacritty >/dev/null && echo 'ERROR: alacritty not\
       \ found'"
+    check_waybar: "command -v waybar >/dev/null && echo 'ERROR: waybar not found'"
   nvim_plug: nvim +PlugInstall +qall
 config:
   backup: true
@@ -50,6 +51,7 @@ dotfiles:
     src: config/sway/config
     actions:
     - check_sway
+    - check_waybar
   f_sway_backlight_sh:
     src: config/sway/backlight.sh
     dst: ~/.config/sway/backlight.sh
@@ -74,6 +76,21 @@ dotfiles:
     dst: ~/.config/alacritty/alacritty.yml
     actions:
     - check_alacritty
+  f_waybar_config:
+    src: config/waybar/config
+    dst: ~/.config/waybar/config
+    actions:
+    - check_waybar
+  f_waybar_style:
+    src: config/waybar/style.css
+    dst: ~/.config/waybar/style.css
+    actions:
+    - check_waybar
+  f_waybar_mediaplayer:
+    src: config/waybar/mediaplayer.py
+    dst: ~/.config/waybar/mediaplayer.py
+    actions:
+    - check_waybar
 profiles:
   storm:
     dotfiles:
@@ -85,6 +102,9 @@ profiles:
     - f_albert_config
     - f_sway_backlight_sh
     - f_alacritty_yml
+    - f_waybar_config
+    - f_waybar_style
+    - f_waybar_mediaplayer
   cyclone:
     dotfiles:
     - f_nvim_config

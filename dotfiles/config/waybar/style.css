@@ -1,0 +1,128 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #282828;
+    /*border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    color: #ebdbb2;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: #ebdbb2;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #32302f;
+    border-bottom: 3px solid #ebdbb2;
+}
+
+#workspaces button.urgent {
+    background-color: #cc241d;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
+#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
+    padding: 0 10px;
+    margin: 0 5px;
+}
+
+#clock {
+    background-color: #7c6f64;
+}
+
+#battery {
+    background-color: #458588;
+}
+
+#battery.charging {
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #458588;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background: #cc241d;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    background: #689d6a;
+}
+
+#memory {
+    background: #b16286;
+}
+
+#backlight {
+    background: #d79921;
+}
+
+#network {
+    background: #458588;
+}
+
+#network.disconnected {
+    background: #cc241d;
+}
+
+#pulseaudio {
+    background: #d65d0e;
+}
+
+#pulseaudio.muted {
+    background: #90b1b1;
+}
+
+#custom-media {
+    background: #d65d0e;
+}
+
+.custom-spotify {
+    background: #66cc99;
+}
+
+.custom-vlc {
+    background: #ffa000;
+}
+
+#temperature {
+    background: #f0932b;
+}
+
+#temperature.critical {
+    background: #eb4d4b;
+}
+
+#tray {
+    background-color: #2980b9;
+}
+
+#idle_inhibitor {
+    background-color: #2d3436;
+}
+
+#idle_inhibitor.activated {
+    background-color: #ecf0f1;
+    color: #2d3436;
+}
