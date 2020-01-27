@@ -71,6 +71,9 @@ dotfiles:
     src: zshrc
     actions:
     - check_zsh
+  d_zsh:
+    src: config/zsh
+    dst: ~/.config/zsh
   f_alacritty_yml:
     src: config/alacritty/alacritty.yml
     dst: ~/.config/alacritty/alacritty.yml
@@ -98,6 +101,7 @@ profiles:
     - f_nvim_config
     - f_nvim_coc_config
     - f_zshrc
+    - d_zsh
     - f_tmux_config
     - f_albert_config
     - f_sway_backlight_sh

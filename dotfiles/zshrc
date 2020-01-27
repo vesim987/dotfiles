@@ -1,33 +1,3 @@
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-export ZSH=~/.local/share/oh-my-zsh/
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-plugins=(
-  archlinux
-  command-not-found
-  common-aliases
-  extract
-  #last-working-dir
-  pip
-  python
-  ssh-agent
-  sudo
-  systemd
-  fzf
-  tmux
-  #vi-mode
-  git
-  zsh-autosuggestions
-)
-
-source $ZSH/oh-my-zsh.sh
-
-export MANPAGER="/bin/sh -c \"col -b | nvim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
-export EDITOR=nvim
-
-hash nvimpager && export PAGER=nvimpager
-
-hash nvim && alias vim=nvim
-
+for file in ~/.config/zsh/*.zsh; do
+	source "$file"
+done
