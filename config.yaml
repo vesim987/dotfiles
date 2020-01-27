@@ -19,7 +19,7 @@ config:
   create: true
   banner: false
   showdiff: true
-  dotpath: dotfiles
+  dotpath: dotfiles_home
 dotfiles:
   f_albert_config:
     dst: ~/.config/albert/albert.conf
