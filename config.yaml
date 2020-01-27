@@ -52,6 +52,9 @@ dotfiles:
     actions:
     - check_sway
     - check_waybar
+  d_sway_conf.d:
+    src: config/sway/conf.d
+    dst: ~/.config/sway/conf.d
   f_sway_backlight_sh:
     src: config/sway/backlight.sh
     dst: ~/.config/sway/backlight.sh
@@ -98,6 +101,7 @@ profiles:
   storm:
     dotfiles:
     - f_sway_config
+    - d_sway_conf.d
     - f_nvim_config
     - f_nvim_coc_config
     - f_zshrc
