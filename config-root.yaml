@@ -1,0 +1,43 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: dotfiles_root
+  ignoreempty: false
+  keepdot: true
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: false
+  showdiff: false
+dotfiles:
+  f_mkinitcpio.conf:
+    src: etc/mkinitcpio.conf
+    dst: /etc/mkinitcpio.conf
+  f_pacman.conf:
+    src: etc/pacman.conf
+    dst: /etc/pacman.conf
+  f_pacserve-ports.conf:
+    src: etc/pacserve/pacserve-ports.conf
+    dst: /etc/pacserve/pacserve-ports.conf
+  f_pacserve.service.conf:
+    src: etc/pacserve/pacserve.service.conf
+    dst: /etc/pacserve/pacserve.service.conf
+  f_locale.conf:
+    src: etc/locale.conf
+    dst: /etc/locale.conf
+  f_locale.gen:
+    src: etc/locale.gen
+    dst: /etc/locale.gen
+  f_99-zsh.hook:
+    src: etc/pacman.d/hooks/99-zsh.hook
+    dst: /etc/pacman.d/hooks/99-zsh.hook
+profiles:
+  storm:
+    dotfiles:
+    - f_mkinitcpio.conf
+    - f_pacman.conf
+    - f_pacserve-ports.conf
+    - f_pacserve.service.conf
+    - f_locale.conf
+    - f_locale.gen
+    - f_99-zsh.hook
