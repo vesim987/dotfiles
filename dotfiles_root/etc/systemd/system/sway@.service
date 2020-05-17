@@ -1,0 +1,36 @@
+[Unit]
+Description=Sway compositor
+Conflicts=getty@$I.service
+After=systemd-user-sessions.service getty@tty1.service 
+StartLimitInterval=200
+StartLimitBurst=5
+
+[Service]
+ExecStartPre=-/usr/bin/chvt %I
+ExecStart=/usr/bin/dbus-launch --exit-with-session /usr/bin/sway --debug --verbose
+TTYPath=/dev/tty%I
+TTYReset=yes
+TTYVHangup=yes
+TTYVTDisallocate=yes
+PAMName=login
+User=vesim
+WorkingDirectory=/home/vesim
+Environment=QT_QPA_PLATFORMTHEME=qt5ct
+Environment=QT_QPA_PLATFORM=wayland
+Environment=QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+Environment=ECORE_EVAS_ENGINE=wayland_egl
+Environment=ELM_ENGINE=wayland_egl
+Environment=SDL_VIDEODRIVER=wayland
+Environment=XDG_CURRENT_DESKTOP=sway
+Environment=XDG_SESSION_TYPE=wayland
+Environment=RTC_USE_PIPEWIRE=true
+Environment=_JAVA_AWT_WM_NONREPARENTING=1
+Restart=on-success
+RestartSec=30
+StandardInput=tty
+StandardError=journal
+StandardOutput=journal
+
+[Install]
+WantedBy=graphical.target
+Alias=display-manager.service

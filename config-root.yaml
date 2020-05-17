@@ -31,6 +31,9 @@ dotfiles:
   f_99-zsh.hook:
     src: etc/pacman.d/hooks/99-zsh.hook
     dst: /etc/pacman.d/hooks/99-zsh.hook
+  f_sway@.service:
+    src: etc/systemd/system/sway@.service
+    dst: /etc/systemd/system/sway@.service
 profiles:
   storm:
     dotfiles:
@@ -41,3 +44,4 @@ profiles:
     - f_locale.conf
     - f_locale.gen
     - f_99-zsh.hook
+    - f_sway@.service
