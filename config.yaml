@@ -118,6 +118,15 @@ dotfiles:
   f_nvim_syntax_vim:
     src: config/nvim/after/syntax/vim.vim
     dst: ~/.config/nvim/after/syntax/vim.vim
+  f_run_terminal.sh:
+    src: config/sway/run_terminal.sh
+    dst: ~/.config/sway/run_terminal.sh
+  d_idle:
+    src: config/sway/idle
+    dst: ~/.config/sway/idle
+  f_lock.sh:
+    src: config/sway/lock.sh
+    dst: ~/.config/sway/lock.sh
 profiles:
   g_shell:
     dotfiles:
@@ -148,6 +157,9 @@ profiles:
     - f_tmux_config
     - f_albert_config
     - f_alacritty_yml
+    - f_run_terminal.sh
+    - d_idle
+    - f_lock.sh
     include:
     - g_shell
     - g_nvim
