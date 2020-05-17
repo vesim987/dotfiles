@@ -26,9 +26,6 @@ dotfiles:
     src: config/albert/albert.conf
     actions:
     - check_albert
-  f_nvim_coc_config:
-    dst: ~/.config/nvim/coc-settings.json
-    src: config/nvim/coc-settings.json
   f_compton.conf:
     dst: ~/.config/compton.conf
     src: config/compton.conf
@@ -39,13 +36,6 @@ dotfiles:
     src: config/i3/config
     actions:
     - check_i3
-  f_nvim_config:
-    dst: ~/.config/nvim/init.vim
-    src: config/nvim/init.vim
-    actions:
-    - check_nvim
-    - nvim_plug_install
-    - nvim_plug
   f_sway_config:
     dst: ~/.config/sway/config
     src: config/sway/config
@@ -97,32 +87,85 @@ dotfiles:
     dst: ~/.config/waybar/mediaplayer.py
     actions:
     - check_waybar
+  f_nvim_config:
+    dst: ~/.config/nvim/init.vim
+    src: config/nvim/init.vim
+    actions:
+    - check_nvim
+    - nvim_plug_install
+    - nvim_plug
+  f_nvim_plugins:
+    src: config/nvim/conf.d/01-plugins.vim
+    dst: ~/.config/nvim/conf.d/01-plugins.vim
+  f_nvim_appearance:
+    src: config/nvim/conf.d/02-appearance.vim
+    dst: ~/.config/nvim/conf.d/02-appearance.vim
+  f_nvim_keybinds:
+    src: config/nvim/conf.d/03-keybinds.vim
+    dst: ~/.config/nvim/conf.d/03-keybinds.vim
+  f_nvim_languageclient:
+    src: config/nvim/conf.d/04-languageclient.vim
+    dst: ~/.config/nvim/conf.d/04-languageclient.vim
+  f_nvim_language:
+    src: config/nvim/conf.d/05-language.vim
+    dst: ~/.config/nvim/conf.d/05-language.vim
+  f_nvim_lightline:
+    src: config/nvim/conf.d/06-lightline.vim
+    dst: ~/.config/nvim/conf.d/06-lightline.vim
+  f_nvim_clipboard:
+    src: config/nvim/conf.d/99-clipboard.vim
+    dst: ~/.config/nvim/conf.d/99-clipboard.vim
+  f_nvim_syntax_vim:
+    src: config/nvim/after/syntax/vim.vim
+    dst: ~/.config/nvim/after/syntax/vim.vim
 profiles:
-  storm:
+  g_shell:
+    dotfiles:
+    - f_zshrc
+    - d_zsh
+  g_nvim:
+    dotfiles:
+    - f_nvim_config
+    - f_nvim_plugins
+    - f_nvim_appearance
+    - f_nvim_keybinds
+    - f_nvim_languageclient
+    - f_nvim_language
+    - f_nvim_lightline
+    - f_nvim_clipboard
+    - f_nvim_syntax_vim
+  g_sway:
     dotfiles:
     - f_sway_config
     - d_sway_conf.d
-    - f_nvim_config
-    - f_nvim_coc_config
-    - f_zshrc
-    - d_zsh
-    - f_tmux_config
-    - f_albert_config
-    - f_sway_backlight_sh
-    - f_alacritty_yml
     - f_waybar_config
     - f_waybar_style
     - f_waybar_mediaplayer
-  cyclone:
+    - f_sway_backlight_sh
+
+  storm:
     dotfiles:
-    - f_nvim_config
-    - f_nvim_coc_config
-    - f_zshrc
     - f_tmux_config
     - f_albert_config
     - f_alacritty_yml
+    - f_vim.vim
+    include:
+    - g_shell
+    - g_nvim
+    - g_sway
+
+  cyclone:
+    dotfiles:
+    - f_tmux_config
+    - f_albert_config
+    - f_alacritty_yml
+    include:
+    - g_shell
+    - g_nvim
+
   vps:
     dotfiles:
-    - f_zshrc
-    - f_nvim_config
     - f_tmux_config
+    include:
+    - g_shell
+    - g_nvim
