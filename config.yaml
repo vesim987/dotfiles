@@ -148,7 +148,6 @@ profiles:
     - f_tmux_config
     - f_albert_config
     - f_alacritty_yml
-    - f_vim.vim
     include:
     - g_shell
     - g_nvim
