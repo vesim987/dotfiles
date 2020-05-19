@@ -1,0 +1,12 @@
+[Trigger]
+Type = File
+Operation = Install
+Operation = Upgrade
+Target = usr/lib/modules/*/vmlinuz
+Target = usr/lib/initcpio/*
+
+[Action]
+Description = Generating signed self-boot kernels...
+When = PostTransaction
+Exec = /usr/share/libalpm/scripts/secure-boot
+NeedsTargets

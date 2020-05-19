@@ -34,6 +34,12 @@ dotfiles:
   f_sway@.service:
     src: etc/systemd/system/sway@.service
     dst: /etc/systemd/system/sway@.service
+  f_99-secure-boot.hook:
+    src: usr/share/libalpm/hooks/99-secure-boot.hook
+    dst: /usr/share/libalpm/hooks/99-secure-boot.hook
+  f_secure-boot:
+    src: usr/share/libalpm/scripts/secure-boot
+    dst: /usr/share/libalpm/scripts/secure-boot
 profiles:
   storm:
     dotfiles:
@@ -45,3 +51,5 @@ profiles:
     - f_locale.gen
     - f_99-zsh.hook
     - f_sway@.service
+    - f_99-secure-boot.hook
+    - f_secure-boot
