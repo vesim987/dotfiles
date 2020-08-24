@@ -1,14 +1,13 @@
 export ZSH=~/.local/share/oh-my-zsh/
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
+POWERLEVEL9K_TRANSIENT_PROMPT=always
 plugins=(
   archlinux
   autojump
   command-not-found
   common-aliases
   extract
-  #last-working-dir
   pip
   python
   ssh-agent
@@ -17,9 +16,9 @@ plugins=(
   fzf
   fzf-docker
   tmux
-  #vi-mode
   git
   zsh-autosuggestions
+  zsh-syntax-highlighting
   virtualenv
   virtualenvwrapper
 )
