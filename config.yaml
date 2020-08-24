@@ -127,6 +127,36 @@ dotfiles:
   f_lock.sh:
     src: config/sway/lock.sh
     dst: ~/.config/sway/lock.sh
+  f_brighten_screen.sh:
+    src: config/sway/idle/brighten_screen.sh
+    dst: ~/.config/sway/idle/brighten_screen.sh
+  f_dim_screen.sh:
+    src: config/sway/idle/dim_screen.sh
+    dst: ~/.config/sway/idle/dim_screen.sh
+  f_idle_lock.sh:
+    src: config/sway/idle/lock.sh
+    dst: ~/.config/sway/idle/lock.sh
+  f_outputs_off.sh:
+    src: config/sway/idle/outputs_off.sh
+    dst: ~/.config/sway/idle/outputs_off.sh
+  f_outputs_on.sh:
+    src: config/sway/idle/outputs_on.sh
+    dst: ~/.config/sway/idle/outputs_on.sh
+  f_start.sh:
+    src: config/sway/idle/start.sh
+    dst: ~/.config/sway/idle/start.sh
+  f_suspend.sh:
+    src: config/sway/idle/suspend.sh
+    dst: ~/.config/sway/idle/suspend.sh
+  f_ac.sh:
+    src: config/sway/idle/inhibitors/ac.sh
+    dst: ~/.config/sway/idle/inhibitors/ac.sh
+  f_pa-chromium.sh:
+    src: config/sway/idle/inhibitors/pa-chromium.sh
+    dst: ~/.config/sway/idle/inhibitors/pa-chromium.sh
+  f_pa.sh:
+    src: config/sway/idle/inhibitors/pa.sh
+    dst: ~/.config/sway/idle/inhibitors/pa.sh
 profiles:
   g_shell:
     dotfiles:
@@ -151,6 +181,16 @@ profiles:
     - f_waybar_style
     - f_waybar_mediaplayer
     - f_sway_backlight_sh
+    - f_brighten_screen.sh
+    - f_dim_screen.sh
+    - f_idle_lock.sh
+    - f_outputs_off.sh
+    - f_outputs_on.sh
+    - f_start.sh
+    - f_suspend.sh
+    - f_ac.sh
+    - f_pa-chromium.sh
+    - f_pa.sh
 
   storm:
     dotfiles:

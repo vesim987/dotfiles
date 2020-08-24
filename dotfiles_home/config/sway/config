@@ -1,3 +1,2 @@
 # vim:ft=i3config
-
 include ~/.config/sway/conf.d/*.conf
