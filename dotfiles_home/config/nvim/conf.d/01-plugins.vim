@@ -20,6 +20,8 @@ Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'junegunn/fzf' 
 Plug 'junegunn/fzf.vim' 
 
+Plug 'peterhoeg/vim-qml'
+
 " tmux integration for vim        
 " Plug 'benmills/vimux' 
 
@@ -38,9 +40,9 @@ Plug 'tpope/vim-commentary'
 " detect indent style (tabs vs. spaces)
 " Plug 'tpope/vim-sleuth'
 
-Plug 'wellle/context.vim'
-let g:context_presenter = 'preview'
-let g:context_border_char = '▬'
+" Plug 'wellle/context.vim'
+" let g:context_presenter = 'preview'
+" let g:context_border_char = '▬'
 
 Plug 'igankevich/mesonic'
 
@@ -99,18 +101,19 @@ let g:vista_default_executive = 'nvim_lsp'
 
 
 " Autocomplete {
-  Plug 'Shougo/echodoc.vim' " FIXME: somehow force it to work
-  set cmdheight=1
-  let g:echodoc#enable_at_startup = 1
-  let g:echodoc#type = 'signature'
+  " Plug 'Shougo/echodoc.vim' " FIXME: somehow force it to work
+  " set cmdheight=1
+  " let g:echodoc#enable_at_startup = 1
+  " let g:echodoc#type = 'signature'
 :
   " Plug 'richq/vim-cmake-completion' " FIXME: doesn't work, probably because of deoplete
   Plug 'neovim/nvim-lsp'
   Plug 'weilbith/nvim-lsp-smag'
   Plug 'haorenW1025/completion-nvim'
-  " Plug 'haorenW1025/diagnostic-nvim'
+  Plug 'haorenW1025/diagnostic-nvim'
 
   Plug 'jackguo380/vim-lsp-cxx-highlight'
+    Plug 'lambdalisue/fern.vim'
   
   " 
   " Plug 'vim-scripts/DoxygenToolkit.vim'

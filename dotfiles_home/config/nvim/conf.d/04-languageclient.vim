@@ -1,29 +1,29 @@
 lua<<EOF
-require'nvim_lsp'.pyls_ms.setup{}
+require'nvim_lsp'.pyls.setup{}
 
 
-require'nvim_lsp'.ccls.setup{
-  init_options = {
-    highlight = {
-      lsRanges = true;
-    }
-  },
-  on_attach = function() 
-    vim.lsp.callbacks['$ccls/info'] = function (_, _, result)
-        local progress = math.floor(100-(result['pipeline']['pendingIndexRequests']/result['project']['entries'])*100)
-        vim.api.nvim_set_var('ccls_progress', tostring(progress))
-    end
-    vim.loop.new_timer():start(1000, 1000, vim.schedule_wrap(function()
-        vim.lsp.buf_request(0, '$ccls/info')
-    end))
+require'nvim_lsp'.clangd.setup{
+  --init_options = {
+  --  highlight = {
+  --    lsRanges = true;
+  --  }
+  --},
+  --on_attach = function() 
+  --  vim.lsp.callbacks['$ccls/info'] = function (_, _, result)
+  --      local progress = math.floor(100-(result['pipeline']['pendingIndexRequests']/result['project']['entries'])*100)
+  --      vim.api.nvim_set_var('ccls_progress', tostring(progress))
+  --  end
+  --  vim.loop.new_timer():start(1000, 1000, vim.schedule_wrap(function()
+  --      vim.lsp.buf_request(0, '$ccls/info')
+  --  end))
 
-  end
+  --end
 }
 EOF
 
 let g:ccls_progress = 0
 
-" let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_enable_virtual_text = 1
 
 autocmd BufEnter * lua require'completion'.on_attach()
 " autocmd BufEnter * lua require'diagnostic'.on_attach()
@@ -46,3 +46,5 @@ set shortmess+=c
   nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
   nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
   nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+"autocmd BufWritePre *.cpp *.hpp lua vim.lsp.buf.formatting_sync(nil, 1000)
