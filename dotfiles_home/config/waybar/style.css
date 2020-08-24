@@ -1,27 +1,65 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    border: 0;
+    border-radius: 5px;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Roboto;
+    font-size: 14px;
     min-height: 0;
 }
 
 window#waybar {
-    background: #282828;
-    /*border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    background-color: #282828;
+    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    /* color: #A89984; */
     color: #ebdbb2;
+    transition-property: background-color;
+    transition-duration: .5s;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: #000000;
+    border: none;
+}
+
+#custom-dnd.on {
+    border-bottom: 3px solid #CC241D;
+}
+
 #workspaces button {
     padding: 0 5px;
-    background: transparent;
+    background-color: transparent;
     color: #ebdbb2;
+    /* color: #A89984; */
     border-bottom: 3px solid transparent;
 }
 
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    box-shadow: inherit;
+    background-color: #665C54;
+    border-bottom: 3px solid #ebdbb2;
+}
+
 #workspaces button.focused {
-    background: #32302f;
+    color: #ebdbb2;
+    background-color: #665C54;
     border-bottom: 3px solid #ebdbb2;
 }
 
@@ -29,36 +67,30 @@ window#waybar {
     background-color: #cc241d;
 }
 
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid #ffffff;
-}
-
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
-    padding: 0 10px;
-    margin: 0 5px;
-}
-
 #clock {
-    background-color: #7c6f64;
+    background-color: #b16286;
 }
 
 #battery {
-    background-color: #458588;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 #battery.charging {
+    color: #ffffff;
     background-color: #26A65B;
 }
 
 @keyframes blink {
     to {
-        background-color: #458588;
+        background-color: #ffffff;
+        color: #000000;
     }
 }
 
 #battery.critical:not(.charging) {
-    background: #cc241d;
+    background-color: #cc241d;
+    color: #ebdbb2;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -66,63 +98,80 @@ window#waybar {
     animation-direction: alternate;
 }
 
+label:focus {
+    background-color: #000000;
+}
+
 #cpu {
-    background: #689d6a;
+    background-color: #98971a;
 }
 
 #memory {
-    background: #b16286;
+    background-color: #98971a;
 }
 
 #backlight {
-    background: #d79921;
+    background-color: #90b1b1;
 }
 
 #network {
-    background: #458588;
+    background-color: #458588;
 }
 
 #network.disconnected {
-    background: #cc241d;
-}
-
-#pulseaudio {
-    background: #d65d0e;
+    background-color: #cc241d;
 }
 
 #pulseaudio.muted {
-    background: #90b1b1;
-}
-
-#custom-media {
-    background: #d65d0e;
-}
-
-.custom-spotify {
-    background: #66cc99;
-}
-
-.custom-vlc {
-    background: #ffa000;
+    border-bottom: 3px solid #CC241D;
 }
 
 #temperature {
-    background: #f0932b;
+    background-color: #d65d0e;
 }
 
 #temperature.critical {
-    background: #eb4d4b;
+    background-color: #eb4d4b;
 }
 
-#tray {
-    background-color: #2980b9;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#custom-vpn,
+#mpd {
+    padding: 0 10px;
+    margin: 0 4px;
+    color: #ebdbb2;
+    /* color: #A89984; */
+    background-color: inherit;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    color: #ebdbb2;
+    border-bottom: 3px solid #689D6A;
+}
+
+#custom-vpn {
+    border-bottom: 3px solid #98971A;
+}
+
+#custom-vpn.down {
+    border-bottom: none;
+}
+
+#mode {
+    background-color: #b16286;
+}
+
+#custom-media {
+    border-bottom: 3px solid #b16286;
 }

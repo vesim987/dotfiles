@@ -38,15 +38,16 @@ def on_metadata(player, metadata, manager):
     elif player.get_artist() != '' and player.get_title() != '':
         track_info = '{artist} - {title}'.format(artist=player.get_artist(),
                                                  title=player.get_title())
+    else:
+        track_info = player.get_title()
 
-    if player.props.status != 'Playing':
+    if player.props.status != 'Playing' and track_info:
         track_info = ' ' + track_info
     write_output(track_info, player)
 
 
 def on_player_appeared(manager, player, selected_player=None):
-    if player is not None:
-        logger.debug('new player')
+    if player is not None and (selected_player is None or player.name == selected_player):
         init_player(manager, player)
     else:
         logger.debug("New player appeared, but it's not the selected player, skipping")
@@ -78,7 +79,7 @@ def signal_handler(sig, frame):
 def parse_arguments():
     parser = argparse.ArgumentParser()
 
-    # Increase verbosity with every occurance of -v
+    # Increase verbosity with every occurence of -v
     parser.add_argument('-v', '--verbose', action='count', default=0)
 
     # Define for which player we're listening
@@ -124,4 +125,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
